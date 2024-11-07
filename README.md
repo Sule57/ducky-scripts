@@ -8,3 +8,7 @@ This repository is created just so I make sure that I don't lose the actually wo
 You are welcome to use the scripts from this repository for **EDUCATIONAL** and **TESTING PURPOSES**.
 
 The creator and/or contributors are not responsible for any misuse of the repository content.
+
+# Notes
+
+Within the scripts in this repo, where values are found between [[]] brackets, they represent values that need to be updated (i.e. [[TCP_LISTENER_ADDRESS]] should be updated with the address of your TCP listener).
